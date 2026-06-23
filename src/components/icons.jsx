@@ -4,17 +4,17 @@
 export function WhatsAppIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
+      {/* speech-bubble silhouette with the classic bottom-left tail */}
       <path
-        d="M4 4.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H9.5L5 20v-3.5H4A1.5 1.5 0 0 1 2.5 15V6A1.5 1.5 0 0 1 4 4.5Z"
+        d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.5-1.2A8.5 8.5 0 1 0 12 3.5Z"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
+      {/* handset / call glyph, same gesture as the WhatsApp mark */}
       <path
-        d="M7.5 8.5c0 3 2.5 5.5 5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
+        d="M9 8.2c.4-.4 1-.4 1.3.1l.8 1.3c.2.3.1.7-.1.9l-.5.5c-.2.2-.2.5-.1.7.5.9 1.3 1.7 2.2 2.2.2.1.5.1.7-.1l.5-.5c.2-.2.6-.3.9-.1l1.3.8c.5.3.5.9.1 1.3-.6.6-1.5 1-2.4.7-1.7-.5-3.6-2.4-4.1-4.1-.3-.9.1-1.8.7-2.4Z"
+        fill="currentColor"
       />
     </svg>
   );

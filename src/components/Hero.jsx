@@ -36,7 +36,7 @@ export default function Hero() {
 
     // ── 1. Initial states ─────────────────────────────────────────────
     gsap.set(lockup,   { opacity: 0 });
-    gsap.set(editionLine, { opacity: 0, y: -6 });
+    gsap.set(editionLine, { opacity: 0, x: 5, y: -12 });
     gsap.set(logoClip, { clipPath: 'inset(0 0 100% 0)' }); // hidden; reveals top-to-bottom
     gsap.set(img,      { filter: 'brightness(1.0)' });
     gsap.set(blade,    { top: '0%', opacity: 0 });
@@ -48,37 +48,37 @@ export default function Hero() {
     gsap.set(scrollRef.current, { opacity: 0 });
 
     // ── 2. Reveal timeline ────────────────────────────────────────────
-    const tl = gsap.timeline();
+    const reveal = gsap.timeline();
 
     // Lockup becomes active against pure black
-    tl.to(lockup, { opacity: 1, duration: 0.06, ease: 'none' }, 0.08);
+    reveal.to(lockup, { opacity: 1, duration: 0.06, ease: 'none' }, 0.08);
 
     // Blade appears at top edge of logo
-    tl.to(blade, { opacity: 1, duration: 0.07, ease: 'none' }, 0.14);
+    reveal.to(blade, { opacity: 1, duration: 0.07, ease: 'none' }, 0.14);
 
     // Blade cuts downward; logo clips in exactly in sync — engraved into screen
-    tl.to(blade,    { top: '100%',                duration: 0.76, ease: 'power1.inOut' }, 0.20);
-    tl.to(logoClip, { clipPath: 'inset(0 0 0% 0)', duration: 0.76, ease: 'power1.inOut' }, 0.20);
+    reveal.to(blade,    { top: '100%',                duration: 0.76, ease: 'power1.inOut' }, 0.20);
+    reveal.to(logoClip, { clipPath: 'inset(0 0 0% 0)', duration: 0.76, ease: 'power1.inOut' }, 0.20);
 
     // Blade exits — brief gleam as the cut completes, then settles pure white
-    tl.to(blade, { opacity: 0, duration: 0.07, ease: 'none' }, 0.94);
-    tl.to(img,   { filter: 'brightness(1.14)', duration: 0.11, ease: 'none' }, 0.92);
-    tl.to(img,   { filter: 'brightness(1.0)',  duration: 0.45, ease: 'power2.out' }, 1.04);
+    reveal.to(blade, { opacity: 0, duration: 0.07, ease: 'none' }, 0.94);
+    reveal.to(img,   { filter: 'brightness(1.14)', duration: 0.11, ease: 'none' }, 0.92);
+    reveal.to(img,   { filter: 'brightness(1.0)',  duration: 0.45, ease: 'power2.out' }, 1.04);
 
     // Dubai Edition mark — settles in above the wordmark, quiet and unhurried
-    tl.to(editionLine, { opacity: 1, y: 0, duration: 0.38, ease: 'power2.out' }, 1.06);
+    reveal.to(editionLine, { opacity: 1, y: -6, duration: 0.38, ease: 'power2.out' }, 1.06);
 
     // Shine pass — a soft light streak glides across the settled white mark.
-    tl.to(sweepGlow, { opacity: 1, duration: 0.18, ease: 'none' }, 1.12);
-    tl.to(sweepGlow, {
+    reveal.to(sweepGlow, { opacity: 1, duration: 0.18, ease: 'none' }, 1.12);
+    reveal.to(sweepGlow, {
       left: '108%',
       duration: 0.95,
       ease: 'power2.inOut',
     }, 1.12);
-    tl.to(sweepGlow, { opacity: 0, duration: 0.22, ease: 'none' }, 1.85);
+    reveal.to(sweepGlow, { opacity: 0, duration: 0.22, ease: 'none' }, 1.85);
 
     // "WRAPTORS MAFIA" — etched downward, same cut technique
-    tl.to(topTxt, {
+    reveal.to(topTxt, {
       opacity: 1,
       clipPath: 'inset(0 0 0% 0)',
       duration: 0.36,
@@ -86,7 +86,7 @@ export default function Hero() {
     }, 1.26);
 
     // Hairline rule — drawn from center out
-    tl.to(brandRule, {
+    reveal.to(brandRule, {
       opacity: 1,
       scaleX: 1,
       duration: 0.25,
@@ -95,7 +95,7 @@ export default function Hero() {
     }, 1.65);
 
     // "LOYALTY OVER ROYALTY"
-    tl.to(botTxt, {
+    reveal.to(botTxt, {
       opacity: 1,
       clipPath: 'inset(0 0 0% 0)',
       duration: 0.31,
@@ -103,11 +103,17 @@ export default function Hero() {
     }, 1.88);
 
     // EST. / 2016 — quiet, last to appear
-    tl.to(est,  { opacity: 1, duration: 0.28, ease: 'power1.out' }, 2.18);
-    tl.to(year, { opacity: 1, duration: 0.28, ease: 'power1.out' }, 2.30);
+    reveal.to(est,  { opacity: 1, duration: 0.28, ease: 'power1.out' }, 2.18);
+    reveal.to(year, { opacity: 1, duration: 0.28, ease: 'power1.out' }, 2.30);
 
     // Scroll cue
-    tl.to(scrollRef.current, { opacity: 1, duration: 0.53, ease: 'power1.out' }, 2.44);
+    reveal.to(scrollRef.current, { opacity: 1, duration: 0.53, ease: 'power1.out' }, 2.44);
+
+    // Trim the whole reveal's pace a touch — same choreography, just a bit snappier.
+    reveal.timeScale(1.2);
+
+    const tl = gsap.timeline();
+    tl.add(reveal);
 
     // ── 3. Exit: slide overlay upward ─────────────────────────────────
     // Runs only once the full reveal has played — no early skip on
