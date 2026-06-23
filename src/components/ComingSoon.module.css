@@ -55,6 +55,69 @@
   padding: 0 20px;
 }
 
+/* ── Scroll cue — quiet hint that the page continues below ── */
+.scrollCue {
+  position: absolute;
+  bottom: clamp(22px, 4vh, 38px);
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: scrollCueIn 1s ease 1.3s forwards;
+  pointer-events: none;
+}
+
+.scrollLabel {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+.scrollLine {
+  position: relative;
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), transparent);
+}
+
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  transform: translateX(-50%);
+  animation: scrollDot 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollCueIn {
+  to { opacity: 1; }
+}
+
+@keyframes scrollDot {
+  0%   { top: 0;    opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 24px; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCue       { animation: none; opacity: 1; }
+  .scrollLine::after { animation: none; top: 12px; opacity: 0.7; }
+}
+
 /* ── Countdown section — its own band directly under the hero ── */
 .countdownSection {
   position: relative;

@@ -51,6 +51,11 @@ export default function ComingSoon() {
             A new destination for luxury wraps, protection, and elevated automotive styling is coming to Dubai.
           </Reveal>
         </div>
+
+        <div className={styles.scrollCue} aria-hidden="true">
+          <span className={styles.scrollLabel}>Scroll</span>
+          <span className={styles.scrollLine} />
+        </div>
       </section>
 
       <ServicesSection />
