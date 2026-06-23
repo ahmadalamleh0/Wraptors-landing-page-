@@ -1,0 +1,148 @@
+.section {
+  position: relative;
+  padding: clamp(64px, 11vh, 104px) 20px;
+  background: var(--black-soft);
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.headline {
+  margin: 0 0 var(--space-md);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.6vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  line-height: 1.15;
+}
+
+.body {
+  margin: 0 0 var(--space-xl);
+  font-size: clamp(0.92rem, 2vw, 1.02rem);
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+/* ── Toronto → Dubai route graphic ── */
+.route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 22px);
+}
+
+.routeCity {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.routeLine {
+  position: relative;
+  width: clamp(80px, 16vw, 160px);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.3) 15%,
+    rgba(255, 255, 255, 0.3) 85%,
+    transparent
+  );
+}
+
+.routeDot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7);
+  transform: translate(-50%, -50%);
+  animation: travel 4s ease-in-out infinite;
+}
+
+@keyframes travel {
+  0%   { left: 0%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeDot { animation: none; left: 50%; opacity: 1; }
+}
+
+/* ── Location pills ── */
+.locations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-xl);
+}
+
+.locationPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.locationFlag {
+  width: 18px;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.stat {
+  margin: var(--space-md) 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+@media (max-width: 480px) {
+  .locations { gap: 8px; }
+  .locationPill { padding: 7px 13px; font-size: 0.68rem; }
+  .locationFlag { width: 16px; }
+}

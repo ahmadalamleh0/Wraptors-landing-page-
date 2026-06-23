@@ -1,0 +1,226 @@
+.page {
+  position: relative;
+  background: var(--black);
+}
+
+/* ── Hero: clear, cinematic image — only the centered message sits on it ── */
+.heroSection {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: brightness(0.82) saturate(1.05);
+  opacity: 0.96;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 42% at 50% 52%, rgba(5, 5, 5, 0.58) 0%, rgba(5, 5, 5, 0.2) 55%, rgba(5, 5, 5, 0) 100%),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.32) 0%,
+      rgba(5, 5, 5, 0) 22%,
+      rgba(5, 5, 5, 0) 72%,
+      rgba(5, 5, 5, 0.55) 100%
+    );
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── Countdown section — its own band directly under the hero ── */
+.countdownSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(56px, 10vh, 88px) 20px;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px clamp(40px, 8vh, 72px);
+}
+
+/* ── Headline ── */
+.headline {
+  margin: 0 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.headlineMain {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 7vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  line-height: 1.05;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.headlineAccent {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.4vw, 2rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-shadow: 0 0 26px rgba(255, 255, 255, 0.35);
+}
+
+/* ── Intro copy ── */
+.intro {
+  max-width: 480px;
+  margin: 0;
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ── CTAs (WhatsApp / Instagram) ── */
+.ctaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 400px;
+  margin: var(--space-lg) 0 var(--space-2xl);
+}
+
+@media (min-width: 480px) {
+  .ctaRow {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  padding: 15px 22px;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ctaPrimary {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  color: var(--white);
+}
+
+/* Soft, slow light sweep across the primary CTA — a quiet premium cue, not a loop you notice. */
+.ctaPrimary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg);
+  animation: ctaShimmer 6s ease-in-out infinite;
+}
+
+@keyframes ctaShimmer {
+  0%   { left: -60%; }
+  30%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+.ctaPrimary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.34);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -10px rgba(255, 255, 255, 0.22);
+}
+
+.ctaSecondary {
+  background: var(--glass-bg);
+  border: 1px solid var(--hairline);
+  color: var(--text-dim);
+}
+
+.ctaSecondary:hover {
+  border-color: var(--silver-soft);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -12px rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImage {
+    transform: none !important;
+  }
+  .ctaPrimary::after {
+    animation: none;
+    display: none;
+  }
+}
+
+/* ── Waitlist form section ── */
+.formSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--hairline);
+}
+
+.formTitle {
+  margin: 0 0 var(--space-md);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}

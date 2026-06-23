@@ -1,0 +1,37 @@
+.line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.6vw, 14px);
+}
+
+.word {
+  font-family: 'Jarvane', 'Cinzel', 'Trajan Pro', Georgia, serif;
+  font-size: clamp(0.6rem, 1.3vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(224, 226, 230, 0.92);
+  line-height: 1;
+  white-space: nowrap;
+  /* Engraved: dark shadow pressed below, faint catch-light above —
+     same technique as the WRAPTORS MAFIA wordmark below it. */
+  text-shadow:
+    0 -1px 0   rgba(255, 255, 255, 0.16),
+    0  1px 0   rgba(0, 0, 0, 0.9),
+    0  2px 5px rgba(0, 0, 0, 0.7);
+  -webkit-text-stroke: 0.3px rgba(224, 226, 230, 0.12);
+  -webkit-font-smoothing: antialiased;
+}
+
+.flag {
+  width: clamp(17px, 2.4vw, 22px);
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+@media (max-width: 480px) {
+  .word { font-size: 0.58rem; letter-spacing: 0.26em; }
+  .flag { width: 16px; }
+}
