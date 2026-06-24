@@ -137,6 +137,12 @@
     align-items: flex-end;
   }
 
+  /* The mobile source has extra white margin on the sides specifically so
+     a centered cover-crop always lands inside the car, never on the white. */
+  .footerImage {
+    object-position: center center;
+  }
+
   .footerContent {
     padding: 0 20px clamp(40px, 8vh, 64px);
   }
