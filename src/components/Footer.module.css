@@ -109,6 +109,40 @@
   transform: translateY(-2px);
 }
 
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 360px;
+}
+
+.address,
+.phone {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+  text-align: center;
+  transition: color 0.25s ease;
+}
+
+.address {
+  line-height: 1.5;
+}
+
+.address:hover,
+.phone:hover {
+  color: var(--white);
+}
+
+.phone {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
 .footerBadge {
   padding: 6px 16px;
   border: 1px solid var(--glass-border);

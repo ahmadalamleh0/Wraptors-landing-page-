@@ -1,20 +1,15 @@
 // Minimal line icons used for footer link buttons — single-color, stroke-based,
 // no brand-logo replicas, just clean glyphs that read instantly at a glance.
+// WhatsAppIcon is the one exception: rendered in the real brand colors since
+// that green-circle-plus-handset mark is what makes it instantly recognizable.
 
-export function WhatsAppIcon(props) {
+export function WhatsAppIcon({ className, ...rest }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      {/* speech-bubble silhouette with the classic bottom-left tail */}
+    <svg viewBox="0 0 24 24" className={className} {...rest}>
+      <circle cx="12" cy="12" r="11" fill="#25D366" />
       <path
-        d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.5-1.2A8.5 8.5 0 1 0 12 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      {/* handset / call glyph, same gesture as the WhatsApp mark */}
-      <path
-        d="M9 8.2c.4-.4 1-.4 1.3.1l.8 1.3c.2.3.1.7-.1.9l-.5.5c-.2.2-.2.5-.1.7.5.9 1.3 1.7 2.2 2.2.2.1.5.1.7-.1l.5-.5c.2-.2.6-.3.9-.1l1.3.8c.5.3.5.9.1 1.3-.6.6-1.5 1-2.4.7-1.7-.5-3.6-2.4-4.1-4.1-.3-.9.1-1.8.7-2.4Z"
-        fill="currentColor"
+        d="M8.4 7.7c.4-.4 1-.4 1.3.1l1 1.6c.2.4.2.8-.1 1.1l-.6.7c-.2.2-.2.6 0 .8.7 1.1 1.7 2.1 2.8 2.8.2.2.6.1.8-.1l.7-.6c.3-.3.7-.3 1.1-.1l1.6 1c.5.3.6.9.1 1.3-.7.7-1.8 1.2-2.9.8-2.1-.6-4.4-2.9-5-5-.4-1.1.1-2.2.8-2.9Z"
+        fill="#fff"
       />
     </svg>
   );
@@ -35,6 +30,41 @@ export function YouTubeIcon(props) {
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <rect x="2.5" y="6" width="19" height="12" rx="4" stroke="currentColor" strokeWidth="1.6" />
       <path d="M10.5 9.5v5l5-2.5-5-2.5Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function ExternalLinkIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M9.5 5.5h-3A2 2 0 0 0 4.5 7.5v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14.5 4.5h5v5M19.2 4.8l-8 8"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function PinIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9.5" r="2.3" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }

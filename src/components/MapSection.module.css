@@ -1,0 +1,78 @@
+.section {
+  position: relative;
+  background: var(--black);
+}
+
+.mapWrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(340px, 56vh, 540px);
+  overflow: hidden;
+}
+
+.mapFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* Fully interactive — drag to pan, scroll/pinch to zoom, Google's own
+     controls and place marker all work normally. */
+  filter: grayscale(0.35) brightness(0.72) saturate(1.1) contrast(1.04);
+}
+
+/* Soft edge vignette only — keeps the map readable and its controls usable,
+   just helps it blend into the dark sections above/below. */
+.mapVignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 5, 5, 0.45) 0%,
+    rgba(5, 5, 5, 0) 14%,
+    rgba(5, 5, 5, 0) 86%,
+    rgba(5, 5, 5, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+.openInMaps {
+  position: absolute;
+  bottom: clamp(14px, 3vh, 22px);
+  right: clamp(14px, 3vw, 22px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(8, 8, 9, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 26px -12px rgba(0, 0, 0, 0.7);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.openInMaps:hover {
+  background: rgba(20, 20, 22, 0.9);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.openInMapsIcon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .mapWrap { height: clamp(300px, 52vh, 440px); }
+}

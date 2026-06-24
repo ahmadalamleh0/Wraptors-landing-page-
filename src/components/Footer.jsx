@@ -1,6 +1,14 @@
 import { useEffect, useRef } from 'react';
 import Reveal from './Reveal';
-import { WHATSAPP_LINK, SOCIAL_LINKS, BRAND_NAME } from '../config';
+import {
+  WHATSAPP_LINK,
+  SOCIAL_LINKS,
+  BRAND_NAME,
+  PHONE_DISPLAY,
+  PHONE_LINK,
+  ADDRESS,
+  ADDRESS_MAPS_LINK,
+} from '../config';
 import footerBg from '../assets/footer-cars.jpg';
 import { WhatsAppIcon, InstagramIcon, YouTubeIcon, WaitlistIcon } from './icons';
 import styles from './Footer.module.css';
@@ -61,6 +69,20 @@ export default function Footer() {
             Join Waitlist
           </a>
         </nav>
+
+        <div className={styles.contactInfo}>
+          <a
+            href={ADDRESS_MAPS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.address}
+          >
+            {ADDRESS}
+          </a>
+          <a href={PHONE_LINK} className={styles.phone}>
+            {PHONE_DISPLAY}
+          </a>
+        </div>
 
         <span className={styles.footerBadge}>Launching Soon</span>
       </div>
