@@ -109,8 +109,8 @@ export default function Hero() {
     // Scroll cue
     reveal.to(scrollRef.current, { opacity: 1, duration: 0.53, ease: 'power1.out' }, 2.44);
 
-    // Trim the whole reveal's pace a touch — same choreography, just a bit snappier.
-    reveal.timeScale(1.2);
+    // Trim the whole reveal's pace — same choreography, just snappier overall.
+    reveal.timeScale(1.9);
 
     const tl = gsap.timeline();
     tl.add(reveal);
