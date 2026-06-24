@@ -20,7 +20,7 @@ export default function Footer() {
         const rect = img.parentElement.getBoundingClientRect();
         const vh = window.innerHeight || 1;
         const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
-        img.style.transform = `translateY(${progress * 22}px) scale(1.08)`;
+        img.style.transform = `translateY(${progress * 22}px) scale(1.01)`;
         frame = null;
       });
     }
@@ -38,9 +38,11 @@ export default function Footer() {
       <img ref={imgRef} src={footerBg} alt="" className={styles.footerImage} aria-hidden="true" />
       <div className={styles.footerOverlay} aria-hidden="true" />
 
-      <div className={styles.footerContent}>
+      <div className={styles.footerTop}>
         <p className={styles.footerBrand}>{BRAND_NAME}</p>
+      </div>
 
+      <div className={styles.footerContent}>
         <nav className={styles.footerLinks}>
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon className={styles.linkIcon} aria-hidden="true" />

@@ -124,7 +124,7 @@ export default function Hero() {
       if (!section) return;
       exitTween = gsap.to(section, {
         y: '-100%',
-        duration: 2.5,
+        duration: 1.2,
         ease: 'power3.inOut',
         onComplete: () => {
           if (sectionRef.current) sectionRef.current.style.display = 'none';
@@ -133,7 +133,7 @@ export default function Hero() {
       });
     }
 
-    tl.call(runExit, null, '+=1.6');
+    tl.call(runExit, null, '+=0.4');
 
     return () => {
       tl.kill();
