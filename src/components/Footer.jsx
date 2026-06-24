@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import Reveal from './Reveal';
 import { WHATSAPP_LINK, SOCIAL_LINKS, BRAND_NAME } from '../config';
 import footerBg from '../assets/footer-cars.jpg';
-import footerBgMobile from '../assets/footer-cars-wide.jpg';
 import { WhatsAppIcon, InstagramIcon, YouTubeIcon, WaitlistIcon } from './icons';
 import styles from './Footer.module.css';
 
@@ -36,10 +35,7 @@ export default function Footer() {
 
   return (
     <Reveal as="footer" className={styles.footer}>
-      <picture>
-        <source media="(max-width: 600px)" srcSet={footerBgMobile} />
-        <img ref={imgRef} src={footerBg} alt="" className={styles.footerImage} aria-hidden="true" />
-      </picture>
+      <img ref={imgRef} src={footerBg} alt="" className={styles.footerImage} aria-hidden="true" />
       <div className={styles.footerOverlay} aria-hidden="true" />
 
       <div className={styles.footerTop}>

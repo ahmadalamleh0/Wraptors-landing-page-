@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 35%;
   filter: brightness(0.92);
   opacity: 1;
   will-change: transform;
@@ -129,18 +129,11 @@
   }
 }
 
-/* On phones the photo's full height shows (cover only crops left/right at
-   this aspect), so the centered content can sit right over the car's
-   spoiler text. Anchor it lower instead so that stays uncovered. */
+/* On phones, anchor the content toward the bottom of the full-screen photo
+   rather than dead-center, so it reads more like a caption than an overlay. */
 @media (max-width: 600px) {
   .footer {
     align-items: flex-end;
-  }
-
-  /* The mobile source has extra white margin on the sides specifically so
-     a centered cover-crop always lands inside the car, never on the white. */
-  .footerImage {
-    object-position: center center;
   }
 
   .footerContent {
