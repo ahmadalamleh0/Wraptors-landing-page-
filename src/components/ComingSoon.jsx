@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Countdown from './Countdown';
 import WaitlistForm from './WaitlistForm';
 import Reveal from './Reveal';
@@ -7,26 +8,44 @@ import MapSection from './MapSection';
 import HeroVideo from './HeroVideo';
 import Footer from './Footer';
 import { LAUNCH_DATE, WHATSAPP_LINK, SOCIAL_LINKS } from '../config';
-import heroBg from '../assets/hero-land.jpg';
+import heroPoster from '../assets/hero-poster.jpg';
 import styles from './ComingSoon.module.css';
 
 export default function ComingSoon() {
+  const [showHeroText, setShowHeroText] = useState(false);
+
+  useEffect(() => {
+    // The hero is hidden behind the logo intro at first, so time this from
+    // when that actually finishes (hero:exit) rather than from page load —
+    // lets the video play a few quiet seconds before the text appears.
+    function revealHeroText() {
+      setTimeout(() => setShowHeroText(true), 3200);
+    }
+    window.addEventListener('hero:exit', revealHeroText);
+    return () => window.removeEventListener('hero:exit', revealHeroText);
+  }, []);
+
   return (
     <main className={styles.page}>
       {/* ── Hero: video background + centered message only ── */}
       <section className={styles.heroSection}>
-        <HeroVideo src="/hero-video.mp4" poster={heroBg} className={styles.heroImage} />
+        <HeroVideo src="/hero-video.mp4" poster={heroPoster} className={styles.heroImage} />
         <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={styles.heroContent}>
-          <Reveal as="h1" className={styles.headline}>
+          <h1
+            className={`${styles.headline} ${styles.heroTextReveal} ${showHeroText ? styles.heroTextVisible : ''}`}
+          >
             <span className={styles.headlineMain}>Wraptors Dubai</span>
             <span className={styles.headlineAccent}>Coming Soon</span>
-          </Reveal>
+          </h1>
 
-          <Reveal as="p" className={styles.intro} delay={100}>
+          <p
+            className={`${styles.intro} ${styles.heroTextReveal} ${showHeroText ? styles.heroTextVisible : ''}`}
+            style={{ transitionDelay: showHeroText ? '150ms' : '0ms' }}
+          >
             A new destination for luxury wraps, protection, and elevated automotive styling is coming to Dubai.
-          </Reveal>
+          </p>
         </div>
 
         <div className={styles.scrollCue} aria-hidden="true">

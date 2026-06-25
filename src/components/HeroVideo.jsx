@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-// Autoplaying background video with a mobile-safe fallback: browsers (most
-// notably iOS Safari) can silently block autoplay even with muted+playsInline,
-// so we retry play() on mount and again on the first touch/click. If it never
-// plays, the poster image just stays put — no broken/blank state either way.
+// Autoplaying background video with a mobile-safe fallback. Real mobile
+// browsers (iOS Safari, Android Chrome, in-app webviews) can silently block
+// autoplay even with muted+playsInline, and when that happens the browser
+// falls back to its native paused player — which letterboxes to the video's
+// raw aspect ratio instead of respecting our object-fit:cover. So we go out
+// of our way to make sure muted+inline actually "stick" before play() is
+// attempted, then retry on mount, on canplay, and on first touch/click.
 export default function HeroVideo({ src, poster, className }) {
   const videoRef = useRef(null);
 
@@ -13,8 +16,17 @@ export default function HeroVideo({ src, poster, className }) {
     // Respect reduced-motion: leave the poster image as the static state.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Some mobile browsers only honor the JS property, not just the HTML
+    // attribute — set both explicitly before every play() attempt.
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
     const playVideo = async () => {
       try {
+        video.muted = true;
         await video.play();
       } catch (error) {
         console.log('Autoplay blocked, poster fallback will remain visible.');
@@ -22,6 +34,11 @@ export default function HeroVideo({ src, poster, className }) {
     };
 
     playVideo();
+
+    // Retry once the browser actually has enough data — on a slow connection
+    // the very first attempt can fire before the video is playable yet.
+    video.addEventListener('loadedmetadata', playVideo);
+    video.addEventListener('canplay', playVideo);
 
     const handleUserInteraction = () => {
       playVideo();
@@ -33,6 +50,8 @@ export default function HeroVideo({ src, poster, className }) {
     window.addEventListener('click', handleUserInteraction, { once: true });
 
     return () => {
+      video.removeEventListener('loadedmetadata', playVideo);
+      video.removeEventListener('canplay', playVideo);
       window.removeEventListener('touchstart', handleUserInteraction);
       window.removeEventListener('click', handleUserInteraction);
     };
@@ -46,6 +65,9 @@ export default function HeroVideo({ src, poster, className }) {
       muted
       loop
       playsInline
+      webkit-playsinline="true"
+      disablePictureInPicture
+      controls={false}
       preload="auto"
       poster={poster}
       aria-hidden="true"

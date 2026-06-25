@@ -25,6 +25,12 @@
   filter: brightness(0.82) saturate(1.05);
   opacity: 0.96;
   pointer-events: none;
+  /* The source video has ~13% black letterboxing baked into the top and
+     bottom of every frame. object-fit:cover can't remove that (height is
+     never the overflowing dimension at normal site aspect ratios), so we
+     zoom in past it — 1.4x crops the bars out with a small safety margin. */
+  transform: scale(1.4);
+  transform-origin: center;
 }
 
 .heroOverlay {
@@ -53,6 +59,27 @@
   max-width: 680px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Headline/subtext stay hidden until a few seconds into the hero video,
+   timed from when the logo intro actually clears (see ComingSoon.jsx). */
+.heroTextReveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.heroTextReveal.heroTextVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroTextReveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ── Scroll cue — quiet hint that the page continues below ── */
