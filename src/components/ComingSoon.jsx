@@ -1,45 +1,21 @@
-import { useEffect, useRef } from 'react';
 import Countdown from './Countdown';
 import WaitlistForm from './WaitlistForm';
 import Reveal from './Reveal';
 import ServicesSection from './ServicesSection';
 import BrandIntroSection from './BrandIntroSection';
 import MapSection from './MapSection';
+import HeroVideo from './HeroVideo';
 import Footer from './Footer';
 import { LAUNCH_DATE, WHATSAPP_LINK, SOCIAL_LINKS } from '../config';
 import heroBg from '../assets/hero-land.jpg';
 import styles from './ComingSoon.module.css';
 
 export default function ComingSoon() {
-  const heroImgRef = useRef(null);
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const heroImg = heroImgRef.current;
-    if (!heroImg) return;
-
-    let frame = null;
-    function onScroll() {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        heroImg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.08)`;
-        frame = null;
-      });
-    }
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
-
   return (
     <main className={styles.page}>
-      {/* ── Hero: image + centered message only ── */}
+      {/* ── Hero: video background + centered message only ── */}
       <section className={styles.heroSection}>
-        <img ref={heroImgRef} src={heroBg} alt="" className={styles.heroImage} aria-hidden="true" />
+        <HeroVideo src="/hero-video.mp4" poster={heroBg} className={styles.heroImage} />
         <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={styles.heroContent}>

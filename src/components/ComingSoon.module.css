@@ -23,7 +23,6 @@
   object-position: center 38%;
   filter: brightness(0.82) saturate(1.05);
   opacity: 0.96;
-  will-change: transform;
   pointer-events: none;
 }
 
@@ -259,9 +258,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroImage {
-    transform: none !important;
-  }
   .ctaPrimary::after {
     animation: none;
     display: none;
