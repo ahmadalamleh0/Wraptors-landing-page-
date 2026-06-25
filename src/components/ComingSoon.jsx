@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Countdown from './Countdown';
 import WaitlistForm from './WaitlistForm';
 import Reveal from './Reveal';
@@ -7,23 +6,10 @@ import BrandIntroSection from './BrandIntroSection';
 import HeroVideo from './HeroVideo';
 import Footer from './Footer';
 import { LAUNCH_DATE, WHATSAPP_LINK, SOCIAL_LINKS } from '../config';
-import heroPoster from '../assets/hero-poster.jpg';
+import heroPoster from '../assets/hero-poster.webp';
 import styles from './ComingSoon.module.css';
 
 export default function ComingSoon() {
-  const [showHeroText, setShowHeroText] = useState(false);
-
-  useEffect(() => {
-    // The hero is hidden behind the logo intro at first, so time this from
-    // when that actually finishes (hero:exit) rather than from page load —
-    // lets the video play a few quiet seconds before the text appears.
-    function revealHeroText() {
-      setTimeout(() => setShowHeroText(true), 3200);
-    }
-    window.addEventListener('hero:exit', revealHeroText);
-    return () => window.removeEventListener('hero:exit', revealHeroText);
-  }, []);
-
   return (
     <main className={styles.page}>
       {/* ── Hero: video background + centered message only ── */}
@@ -32,17 +18,12 @@ export default function ComingSoon() {
         <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={styles.heroContent}>
-          <h1
-            className={`${styles.headline} ${styles.heroTextReveal} ${showHeroText ? styles.heroTextVisible : ''}`}
-          >
+          <h1 className={styles.headline}>
             <span className={styles.headlineMain}>Wraptors Dubai</span>
             <span className={styles.headlineAccent}>Coming Soon</span>
           </h1>
 
-          <p
-            className={`${styles.intro} ${styles.heroTextReveal} ${showHeroText ? styles.heroTextVisible : ''}`}
-            style={{ transitionDelay: showHeroText ? '150ms' : '0ms' }}
-          >
+          <p className={styles.intro}>
             A new destination for luxury wraps, protection, and elevated automotive styling is coming to Dubai.
           </p>
         </div>

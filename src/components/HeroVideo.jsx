@@ -1,14 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-// Autoplaying background video with a mobile-safe fallback. Real mobile
-// browsers (iOS Safari, Android Chrome, in-app webviews) can silently block
-// autoplay even with muted+playsInline, and when that happens the browser
-// falls back to its native paused player — which letterboxes to the video's
-// raw aspect ratio instead of respecting our object-fit:cover. So we go out
-// of our way to make sure muted+inline actually "stick" before play() is
-// attempted, then retry on mount, on canplay, and on first touch/click.
+// The opening fraction of a second of the source footage is soft/blurry
+// (the drone shot hasn't settled yet) — start playback a little past it.
+const SKIP_BLUR_SECONDS = 0.5;
+
+// Autoplaying background video with a mobile-safe fallback. The poster is a
+// separate <img> that's always visible underneath, so the first paint is
+// never blank/black — the video only fades in on top once it has actually
+// started playing. Real mobile browsers (iOS Safari, Android Chrome, in-app
+// webviews) can silently block autoplay even with muted+playsInline, and if
+// that happens the poster just stays put forever instead of showing a dead
+// black box.
 export default function HeroVideo({ src, poster, className }) {
   const videoRef = useRef(null);
+  const lastTimeRef = useRef(0);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -26,21 +32,47 @@ export default function HeroVideo({ src, poster, className }) {
     video.setAttribute('webkit-playsinline', '');
     video.load();
 
+    function skipBlurryStart() {
+      if (video.currentTime < SKIP_BLUR_SECONDS) {
+        video.currentTime = SKIP_BLUR_SECONDS;
+      }
+    }
+
     const playVideo = async () => {
       try {
         video.muted = true;
+        skipBlurryStart();
         await video.play();
       } catch (error) {
         console.log('Autoplay blocked, poster fallback will remain visible.');
       }
     };
 
+    function handleLoadedMetadata() {
+      skipBlurryStart();
+      playVideo();
+    }
+
+    function handlePlaying() {
+      setReady(true);
+    }
+
+    // `loop` is handled natively, so there's no event for "just restarted" —
+    // detect it by watching for currentTime dropping back near zero, and
+    // skip the blurry opening again on every cycle, not just the first.
+    function handleTimeUpdate() {
+      if (video.currentTime < 0.15 && lastTimeRef.current > 1) {
+        video.currentTime = SKIP_BLUR_SECONDS;
+      }
+      lastTimeRef.current = video.currentTime;
+    }
+
     playVideo();
 
-    // Retry once the browser actually has enough data — on a slow connection
-    // the very first attempt can fire before the video is playable yet.
-    video.addEventListener('loadedmetadata', playVideo);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('canplay', playVideo);
+    video.addEventListener('playing', handlePlaying);
+    video.addEventListener('timeupdate', handleTimeUpdate);
 
     const handleUserInteraction = () => {
       playVideo();
@@ -52,29 +84,35 @@ export default function HeroVideo({ src, poster, className }) {
     window.addEventListener('click', handleUserInteraction, { once: true });
 
     return () => {
-      video.removeEventListener('loadedmetadata', playVideo);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('canplay', playVideo);
+      video.removeEventListener('playing', handlePlaying);
+      video.removeEventListener('timeupdate', handleTimeUpdate);
       window.removeEventListener('touchstart', handleUserInteraction);
       window.removeEventListener('click', handleUserInteraction);
     };
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      className={className}
-      autoPlay
-      muted
-      loop
-      playsInline
-      webkit-playsinline="true"
-      disablePictureInPicture
-      controls={false}
-      preload="auto"
-      poster={poster}
-      aria-hidden="true"
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+    <>
+      <img src={poster} alt="" className={className} aria-hidden="true" />
+      <video
+        ref={videoRef}
+        className={className}
+        style={{ opacity: ready ? '' : 0, transition: 'opacity 0.8s ease' }}
+        autoPlay
+        muted
+        loop
+        playsInline
+        webkit-playsinline="true"
+        disablePictureInPicture
+        controls={false}
+        preload="auto"
+        poster={poster}
+        aria-hidden="true"
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    </>
   );
 }

@@ -73,26 +73,6 @@
   padding: 0 20px;
 }
 
-/* Headline/subtext stay hidden until a few seconds into the hero video,
-   timed from when the logo intro actually clears (see ComingSoon.jsx). */
-.heroTextReveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-}
-
-.heroTextReveal.heroTextVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroTextReveal {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-}
 
 /* ── Scroll cue — quiet hint that the page continues below ── */
 .scrollCue {
