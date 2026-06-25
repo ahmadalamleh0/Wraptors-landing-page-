@@ -16,10 +16,6 @@ export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIC
 export const PHONE_DISPLAY = '+971 50 253 2392';
 export const PHONE_LINK = 'tel:+971502532392';
 
-// Studio address — shown in the footer and linked out to Google Maps.
-export const ADDRESS = '32 9B St - Al Qouz Ind. Fourth - Al Quoz - Dubai - United Arab Emirates';
-export const ADDRESS_MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
-
 // Social links — swap '#' for the real URLs when ready.
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/wraptors.toronto/?hl=en',

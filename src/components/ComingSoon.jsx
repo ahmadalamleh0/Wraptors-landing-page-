@@ -4,7 +4,6 @@ import WaitlistForm from './WaitlistForm';
 import Reveal from './Reveal';
 import ServicesSection from './ServicesSection';
 import BrandIntroSection from './BrandIntroSection';
-import MapSection from './MapSection';
 import HeroVideo from './HeroVideo';
 import Footer from './Footer';
 import { LAUNCH_DATE, WHATSAPP_LINK, SOCIAL_LINKS } from '../config';
@@ -92,8 +91,6 @@ export default function ComingSoon() {
           </a>
         </Reveal>
       </div>
-
-      <MapSection />
 
       <Footer />
     </main>

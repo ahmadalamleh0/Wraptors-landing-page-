@@ -6,8 +6,6 @@ import {
   BRAND_NAME,
   PHONE_DISPLAY,
   PHONE_LINK,
-  ADDRESS,
-  ADDRESS_MAPS_LINK,
 } from '../config';
 import footerBg from '../assets/footer-cars.jpg';
 import { WhatsAppIcon, InstagramIcon, YouTubeIcon, WaitlistIcon } from './icons';
@@ -71,14 +69,6 @@ export default function Footer() {
         </nav>
 
         <div className={styles.contactInfo}>
-          <a
-            href={ADDRESS_MAPS_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.address}
-          >
-            {ADDRESS}
-          </a>
           <a href={PHONE_LINK} className={styles.phone}>
             {PHONE_DISPLAY}
           </a>

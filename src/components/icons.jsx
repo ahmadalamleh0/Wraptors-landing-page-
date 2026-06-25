@@ -34,41 +34,6 @@ export function YouTubeIcon(props) {
   );
 }
 
-export function ExternalLinkIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path
-        d="M9.5 5.5h-3A2 2 0 0 0 4.5 7.5v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M14.5 4.5h5v5M19.2 4.8l-8 8"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function PinIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path
-        d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="9.5" r="2.3" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
-
 export function WaitlistIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
