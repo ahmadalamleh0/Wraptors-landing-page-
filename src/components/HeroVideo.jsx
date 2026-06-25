@@ -20,9 +20,11 @@ export default function HeroVideo({ src, poster, className }) {
     // attribute — set both explicitly before every play() attempt.
     video.muted = true;
     video.defaultMuted = true;
+    video.autoplay = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
+    video.load();
 
     const playVideo = async () => {
       try {
