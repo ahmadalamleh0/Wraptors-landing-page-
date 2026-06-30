@@ -17,17 +17,6 @@ export default function ComingSoon() {
         <HeroVideo src="/hero-video.mp4" poster={heroPoster} className={styles.heroImage} />
         <div className={styles.heroOverlay} aria-hidden="true" />
 
-        <div className={styles.heroContent}>
-          <h1 className={styles.headline}>
-            <span className={styles.headlineMain}>Wraptors Dubai</span>
-            <span className={styles.headlineAccent}>Coming Soon</span>
-          </h1>
-
-          <p className={styles.intro}>
-            A new destination for luxury wraps, protection, and elevated automotive styling is coming to Dubai.
-          </p>
-        </div>
-
         <div className={styles.scrollCue} aria-hidden="true">
           <span className={styles.scrollLabel}>Scroll</span>
           <span className={styles.scrollLine} />
