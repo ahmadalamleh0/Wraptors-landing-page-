@@ -22,8 +22,6 @@ export default function HeroVideo({ src, poster, className }) {
     // Respect reduced-motion: leave the poster image as the static state.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Some mobile browsers only honor the JS property, not just the HTML
-    // attribute — set both explicitly before every play() attempt.
     // Set as JS properties too — some mobile browsers ignore the HTML
     // attribute alone. Do NOT call video.load() here: it resets the
     // element and cancels the browser's own autoplay attempt, which on
@@ -101,7 +99,7 @@ export default function HeroVideo({ src, poster, className }) {
       <video
         ref={videoRef}
         className={className}
-        style={{ opacity: ready ? '' : 0, transition: 'opacity 0.8s ease' }}
+        style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.8s ease' }}
         autoPlay
         muted
         loop
