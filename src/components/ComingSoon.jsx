@@ -15,7 +15,6 @@ export default function ComingSoon() {
       {/* ── Hero: video background + centered message only ── */}
       <section className={styles.heroSection}>
         <HeroVideo src="/hero-video.mp4" poster={heroPoster} className={styles.heroImage} />
-        <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={styles.scrollCue} aria-hidden="true">
           <span className={styles.scrollLabel}>Scroll</span>
