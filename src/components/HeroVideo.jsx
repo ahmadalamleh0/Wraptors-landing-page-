@@ -24,13 +24,17 @@ export default function HeroVideo({ src, poster, className }) {
 
     // Some mobile browsers only honor the JS property, not just the HTML
     // attribute — set both explicitly before every play() attempt.
+    // Set as JS properties too — some mobile browsers ignore the HTML
+    // attribute alone. Do NOT call video.load() here: it resets the
+    // element and cancels the browser's own autoplay attempt, which on
+    // real iOS Safari means play() is then treated as a non-autoplay
+    // call and silently blocked until the user taps.
     video.muted = true;
     video.defaultMuted = true;
     video.autoplay = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
-    video.load();
 
     function skipBlurryStart() {
       if (video.currentTime < SKIP_BLUR_SECONDS) {
@@ -39,9 +43,9 @@ export default function HeroVideo({ src, poster, className }) {
     }
 
     const playVideo = async () => {
+      if (!video.paused) return; // already playing, don't interrupt
       try {
         video.muted = true;
-        skipBlurryStart();
         await video.play();
       } catch (error) {
         console.log('Autoplay blocked, poster fallback will remain visible.');
@@ -66,8 +70,6 @@ export default function HeroVideo({ src, poster, className }) {
       }
       lastTimeRef.current = video.currentTime;
     }
-
-    playVideo();
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('canplay', playVideo);
