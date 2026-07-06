@@ -80,6 +80,44 @@
   }
 }
 
+/* ── Mobile hero: CTA anchors to the bottom as a cinematic strip ── */
+@media (max-width: 767px) {
+  .heroCta {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    padding: 48px 24px clamp(64px, 13vh, 88px);
+    gap: 12px;
+    /* gradient scrim — only behind the CTA, not over the whole video */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.28) 56%,
+      transparent 100%
+    );
+  }
+
+  .heroH1 {
+    font-size: clamp(0.7rem, 2.8vw, 0.82rem);
+    letter-spacing: 0.06em;
+  }
+
+  .heroCtaButtons {
+    max-width: 80vw;
+    gap: 9px;
+  }
+
+  .heroCtaPrimary,
+  .heroCtaSecondary {
+    padding: 10px 16px;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+}
+
 .heroCtaPrimary {
   flex: 1;
   padding: 14px 28px;
