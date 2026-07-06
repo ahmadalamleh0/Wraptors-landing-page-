@@ -9,17 +9,49 @@ import tint from '../assets/services/tint.jpg';
 import widebody from '../assets/services/widebody.jpg';
 import commercial from '../assets/services/commercial.jpg';
 
-// Sizes drive the desktop editorial grid (see ServicesSection.module.css):
-// row 1 = wide + standard + standard, row 2 = standard + standard + wide,
-// row 3 = featured (full width). Mobile ignores size and stacks everything.
 const SERVICES = [
-  { name: 'Paint Protection Film', image: ppf, size: 'wide' },
-  { name: 'Starlight', image: starlight, size: 'standard' },
-  { name: 'Wrap', image: wrap, size: 'standard' },
-  { name: 'Ceramic Coating', image: ceramic, size: 'standard' },
-  { name: 'Window Tint', image: tint, size: 'standard' },
-  { name: 'Wide Body Kits', image: widebody, size: 'wide' },
-  { name: 'Commercial Wrap', image: commercial, size: 'featured' },
+  {
+    name: 'Paint Protection Film',
+    image: ppf,
+    size: 'wide',
+    description: 'Invisible protection built to preserve paint against road wear, chips, and daily driving.',
+  },
+  {
+    name: 'Starlight',
+    image: starlight,
+    size: 'standard',
+    description: 'A luxury interior upgrade with a custom illuminated ceiling finish.',
+  },
+  {
+    name: 'Wrap',
+    image: wrap,
+    size: 'standard',
+    description: 'Premium color changes and custom finishes designed for a standout presence.',
+  },
+  {
+    name: 'Ceramic Coating',
+    image: ceramic,
+    size: 'standard',
+    description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
+  },
+  {
+    name: 'Window Tint',
+    image: tint,
+    size: 'standard',
+    description: 'Refined privacy, heat rejection, and a sharper exterior profile.',
+  },
+  {
+    name: 'Wide Body Kits',
+    image: widebody,
+    size: 'wide',
+    description: 'Aggressive styling upgrades built for a stronger road presence.',
+  },
+  {
+    name: 'Commercial Wrap',
+    image: commercial,
+    size: 'featured',
+    description: 'Branded vehicle graphics designed to turn daily driving into visibility.',
+  },
 ];
 
 export default function ServicesSection() {
@@ -27,10 +59,10 @@ export default function ServicesSection() {
     <section className={styles.section}>
       <div className={styles.bigText} aria-hidden="true">COMING SOON</div>
 
-      <Reveal as="p" className={styles.kicker}>Our Services</Reveal>
+      <Reveal as="h2" className={styles.kicker}>Our Services</Reveal>
 
       <div className={styles.grid}>
-        {SERVICES.map(({ name, image, size }, i) => (
+        {SERVICES.map(({ name, image, size, description }, i) => (
           <Reveal
             key={name}
             className={`${styles.card} ${styles[size]}`}
@@ -39,6 +71,7 @@ export default function ServicesSection() {
             <img src={image} alt={name} className={styles.cardImage} loading="lazy" />
             <div className={styles.cardOverlay} aria-hidden="true" />
             <span className={styles.cardName}>{name}</span>
+            <p className={styles.cardDesc}>{description}</p>
           </Reveal>
         ))}
       </div>

@@ -16,7 +16,7 @@ export default function BrandIntroSection() {
         <Reveal as="p" className={styles.kicker}>Global Expansion</Reveal>
 
         <Reveal as="h2" className={styles.headline} delay={80}>
-          From Toronto to Dubai
+          From Toronto to <span lang="ar">دبي</span>
         </Reveal>
 
         <Reveal as="p" className={styles.body} delay={160}>
@@ -30,7 +30,7 @@ export default function BrandIntroSection() {
           <span className={styles.routeLine} aria-hidden="true">
             <span className={styles.routeDot} aria-hidden="true" />
           </span>
-          <span className={styles.routeCity}>Dubai</span>
+          <span className={styles.routeCity} lang="ar">دبي</span>
         </Reveal>
 
         <Reveal className={styles.locations} delay={320}>

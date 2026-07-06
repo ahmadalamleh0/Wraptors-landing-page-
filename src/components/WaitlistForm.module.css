@@ -79,8 +79,23 @@
   text-align: center;
 }
 
+.botcheck {
+  display: none !important;
+}
+
 .error {
   margin: 0;
   font-size: 0.82rem;
   color: #e08a8a;
+  line-height: 1.5;
+}
+
+.errorLink {
+  color: #e08a8a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.errorLink:hover {
+  color: #f5b5b5;
 }

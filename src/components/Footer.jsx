@@ -6,12 +6,13 @@ import {
   BRAND_NAME,
   PHONE_DISPLAY,
   PHONE_LINK,
+  OPENING_TAGLINE,
 } from '../config';
 import footerBg from '../assets/footer-cars.jpg';
 import { WhatsAppIcon, InstagramIcon, YouTubeIcon, WaitlistIcon } from './icons';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+export default function Footer({ isLaunched = false }) {
   const imgRef = useRef(null);
 
   useEffect(() => {
@@ -41,11 +42,15 @@ export default function Footer() {
 
   return (
     <Reveal as="footer" className={styles.footer}>
+      {/* swap footer-cars.jpg for a Dubai/marina/desert asset when available */}
       <img ref={imgRef} src={footerBg} alt="" className={styles.footerImage} aria-hidden="true" />
       <div className={styles.footerOverlay} aria-hidden="true" />
 
       <div className={styles.footerTop}>
         <p className={styles.footerBrand}>{BRAND_NAME}</p>
+        {!isLaunched && (
+          <p className={styles.footerTagline}>{OPENING_TAGLINE}</p>
+        )}
       </div>
 
       <div className={styles.footerContent}>
@@ -56,7 +61,7 @@ export default function Footer() {
           </a>
           <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">
             <InstagramIcon className={styles.linkIcon} aria-hidden="true" />
-            Instagram
+            {SOCIAL_LINKS.instagramLabel}
           </a>
           <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">
             <YouTubeIcon className={styles.linkIcon} aria-hidden="true" />
@@ -64,7 +69,7 @@ export default function Footer() {
           </a>
           <a href="#waitlist">
             <WaitlistIcon className={styles.linkIcon} aria-hidden="true" />
-            Join Waitlist
+            {isLaunched ? 'Book Now' : 'Join Waitlist'}
           </a>
         </nav>
 
@@ -74,7 +79,9 @@ export default function Footer() {
           </a>
         </div>
 
-        <span className={styles.footerBadge}>Launching Soon</span>
+        <span className={styles.footerBadge}>
+          {isLaunched ? 'Now Open · Dubai' : 'Launching Soon'}
+        </span>
       </div>
     </Reveal>
   );

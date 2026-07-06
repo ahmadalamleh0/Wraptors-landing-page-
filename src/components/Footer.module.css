@@ -62,6 +62,17 @@
   pointer-events: none;
 }
 
+.footerTagline {
+  margin: 6px 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
 .footerBrand {
   margin: 0;
   font-family: var(--font-signature);

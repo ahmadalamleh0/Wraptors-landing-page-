@@ -3,18 +3,20 @@ import { useEffect, useRef, useState } from 'react';
 // The opening fraction of a second of the source footage is soft/blurry
 // (the drone shot hasn't settled yet) — start playback a little past it.
 const SKIP_BLUR_SECONDS = 0.5;
+// Anything 768px+ gets the horizontal desktop video; below that stays mobile.
+const DESKTOP_QUERY = '(min-width: 768px)';
 
-// Autoplaying background video with a mobile-safe fallback. The poster is a
-// separate <img> that's always visible underneath, so the first paint is
-// never blank/black — the video only fades in on top once it has actually
-// started playing. Real mobile browsers (iOS Safari, Android Chrome, in-app
-// webviews) can silently block autoplay even with muted+playsInline, and if
-// that happens the poster just stays put forever instead of showing a dead
-// black box.
-export default function HeroVideo({ src, poster, className }) {
+export default function HeroVideo({ src, poster, desktopSrc, desktopPoster, className }) {
   const videoRef = useRef(null);
   const lastTimeRef = useRef(0);
   const [ready, setReady] = useState(false);
+
+  // Resolve once at mount — never swap mid-session (would cause a reload flash).
+  const isDesktop = useRef(
+    desktopSrc != null && window.matchMedia(DESKTOP_QUERY).matches
+  );
+  const activeSrc    = isDesktop.current ? desktopSrc    : src;
+  const activePoster = isDesktop.current && desktopPoster ? desktopPoster : poster;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -95,7 +97,7 @@ export default function HeroVideo({ src, poster, className }) {
 
   return (
     <>
-      <img src={poster} alt="" className={className} aria-hidden="true" />
+      <img src={activePoster} alt="" className={className} aria-hidden="true" />
       <video
         ref={videoRef}
         className={className}
@@ -108,10 +110,10 @@ export default function HeroVideo({ src, poster, className }) {
         disablePictureInPicture
         controls={false}
         preload="auto"
-        poster={poster}
+        poster={activePoster}
         aria-hidden="true"
       >
-        <source src={src} type="video/mp4" />
+        <source src={activeSrc} type="video/mp4" />
       </video>
     </>
   );
