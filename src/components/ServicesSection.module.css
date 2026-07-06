@@ -77,19 +77,31 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0) 38%,
-    rgba(0, 0, 0, 0.5) 68%,
-    rgba(0, 0, 0, 0.88) 100%
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0.48) 58%,
+    rgba(0, 0, 0, 0.9) 100%
   );
   pointer-events: none;
 }
 
-.cardName {
+/* Flex container anchored to the card bottom — desc sits above name,
+   both stay at fixed positions (no translateY jank). */
+.cardContent {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 18px 14px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(24px, 3.5vw, 36px) 18px 16px;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.cardName {
+  margin: 0;
   font-family: var(--font-display);
   font-size: clamp(0.92rem, 1.6vw, 1.1rem);
   font-weight: 600;
@@ -97,25 +109,20 @@
   color: var(--white);
   text-align: center;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-  transition: transform 0.35s ease;
 }
 
-/* Description — always in DOM for SEO; revealed on hover (desktop) or
-   subtly visible on mobile where there's no hover state. */
+/* Description — always in DOM for SEO; in layout flow so positions
+   never shift, just colour+transform animate in on hover. */
 .cardDesc {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 52px;
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 0.7rem;
-  line-height: 1.5;
+  font-size: 0.72rem;
+  line-height: 1.55;
   text-align: center;
   color: rgba(255, 255, 255, 0);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95);
-  transition: color 0.35s ease, transform 0.35s ease;
-  pointer-events: none;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 1);
+  transform: translateY(6px);
+  transition: color 0.38s ease, transform 0.38s ease;
 }
 
 @media (hover: hover) {
@@ -126,24 +133,22 @@
   }
 
   .card:hover .cardImage {
-    transform: scale(1.07);
-    filter: saturate(1.05) brightness(1);
-  }
-
-  .card:hover .cardName {
-    transform: translateY(-28px);
+    transform: scale(1.06);
+    filter: saturate(1.05) brightness(0.8);
   }
 
   .card:hover .cardDesc {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.88);
+    transform: translateY(0);
   }
 }
 
-/* Mobile: description subtly visible since there is no hover */
+/* Mobile: description softly visible since there is no hover */
 @media (hover: none) {
   .cardDesc {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.48);
     font-size: 0.65rem;
+    transform: none;
   }
 }
 

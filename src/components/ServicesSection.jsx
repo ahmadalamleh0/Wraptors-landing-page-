@@ -70,8 +70,10 @@ export default function ServicesSection() {
           >
             <img src={image} alt={name} className={styles.cardImage} loading="lazy" />
             <div className={styles.cardOverlay} aria-hidden="true" />
-            <span className={styles.cardName}>{name}</span>
-            <p className={styles.cardDesc}>{description}</p>
+            <div className={styles.cardContent}>
+              <p className={styles.cardDesc}>{description}</p>
+              <span className={styles.cardName}>{name}</span>
+            </div>
           </Reveal>
         ))}
       </div>
