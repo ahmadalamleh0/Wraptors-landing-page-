@@ -283,10 +283,20 @@
   align-items: center;
 }
 
-/* Mobile: nudge horizontal position so WRAPTORS tower stays visible */
+/* Mobile: nudge position + lighten overlay ~12% so the marina reads more clearly */
 @media (max-width: 767px) {
   .countdownSection {
     background-position: 62% 20%;
+  }
+
+  .countdownSection::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.30) 35%,
+      rgba(0, 0, 0, 0.30) 65%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
   }
 }
 
