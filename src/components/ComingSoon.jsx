@@ -73,16 +73,18 @@ export default function ComingSoon() {
 
       {/* ── Countdown / Now Open ── */}
       <section className={styles.countdownSection}>
-        <Reveal>
-          {isLaunched ? (
-            <NowOpenPanel />
-          ) : (
-            <>
-              <Countdown targetDate={LAUNCH_DATE} />
-              <p className={styles.openingTagline}>{OPENING_TAGLINE}</p>
-            </>
-          )}
-        </Reveal>
+        <div className={styles.countdownInner}>
+          <Reveal>
+            {isLaunched ? (
+              <NowOpenPanel />
+            ) : (
+              <>
+                <Countdown targetDate={LAUNCH_DATE} />
+                <p className={styles.openingTagline}>{OPENING_TAGLINE}</p>
+              </>
+            )}
+          </Reveal>
+        </div>
       </section>
 
       <div className={styles.container}>

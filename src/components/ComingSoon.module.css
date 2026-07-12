@@ -168,12 +168,13 @@
 .openingTagline {
   margin: 16px 0 0;
   font-family: var(--font-ui);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: rgba(255, 255, 255, 0.88);
   text-align: center;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9);
 }
 
 /* ── Scroll cue — quiet hint that the page continues below ── */
@@ -239,14 +240,54 @@
   .scrollLine::after { animation: none; top: 12px; opacity: 0.7; }
 }
 
-/* ── Countdown section — its own band directly under the hero ── */
+/* ── Countdown section — full-screen cinematic Dubai Marina backdrop ── */
 .countdownSection {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(56px, 10vh, 88px) 20px;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding: clamp(80px, 12vh, 120px) 20px;
   overflow: hidden;
+  background-image: url('/dubai-marina.jpg');
+  background-size: cover;
+  background-position: 55% 18%;
+  background-repeat: no-repeat;
+}
+
+/* Dark gradient overlay — strong enough to read, light enough to feel cinematic */
+.countdownSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.74) 0%,
+    rgba(0, 0, 0, 0.46) 35%,
+    rgba(0, 0, 0, 0.46) 65%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content layer — sits above the overlay */
+.countdownInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mobile: nudge horizontal position so WRAPTORS tower stays visible */
+@media (max-width: 767px) {
+  .countdownSection {
+    background-position: 62% 20%;
+  }
 }
 
 .container {
