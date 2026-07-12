@@ -16,11 +16,27 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
   filter: brightness(0.92);
   opacity: 1;
   will-change: transform;
   pointer-events: none;
+}
+
+/* Desktop: new doors-open shot — frame so both cars fill the viewport */
+.footerImageDesktop {
+  display: block;
+  object-position: center 62%;
+}
+
+/* Mobile: original shot */
+.footerImageMobile {
+  display: none;
+  object-position: center 55%;
+}
+
+@media (max-width: 768px) {
+  .footerImageDesktop { display: none; }
+  .footerImageMobile  { display: block; }
 }
 
 .footerOverlay {
@@ -155,6 +171,14 @@
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Desktop: taller section so more of the cinematic shot is visible */
+@media (min-width: 769px) {
+  .footer {
+    min-height: 120vh;
+    min-height: 120svh;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

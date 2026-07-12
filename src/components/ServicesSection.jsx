@@ -11,10 +11,11 @@ import commercial from '../assets/services/commercial.jpg';
 
 const SERVICES = [
   {
-    name: 'Paint Protection Film',
-    image: ppf,
+    name: 'Wide Body Kits',
+    image: widebody,
     size: 'wide',
-    description: 'Invisible protection built to preserve paint against road wear, chips, and daily driving.',
+    imgPos: 'center 52%',
+    description: 'Aggressive styling upgrades built for a stronger road presence.',
   },
   {
     name: 'Starlight',
@@ -23,34 +24,38 @@ const SERVICES = [
     description: 'A luxury interior upgrade with a custom illuminated ceiling finish.',
   },
   {
-    name: 'Wrap',
-    image: wrap,
-    size: 'standard',
-    description: 'Premium color changes and custom finishes designed for a standout presence.',
-  },
-  {
-    name: 'Ceramic Coating',
-    image: ceramic,
-    size: 'standard',
-    description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
-  },
-  {
     name: 'Window Tint',
     image: tint,
     size: 'standard',
+    imgPos: 'center 45%',
     description: 'Refined privacy, heat rejection, and a sharper exterior profile.',
   },
   {
-    name: 'Wide Body Kits',
-    image: widebody,
+    name: 'Wrap',
+    image: wrap,
     size: 'wide',
-    description: 'Aggressive styling upgrades built for a stronger road presence.',
+    imgPos: 'center 58%',
+    description: 'Premium color changes and custom finishes designed for a standout presence.',
   },
   {
     name: 'Commercial Wrap',
     image: commercial,
-    size: 'featured',
+    size: 'wide',
     description: 'Branded vehicle graphics designed to turn daily driving into visibility.',
+  },
+  {
+    name: 'Paint Protection Film',
+    image: ppf,
+    size: 'wide',
+    imgPos: 'center 60%',
+    description: 'Invisible protection built to preserve paint against road wear, chips, and daily driving.',
+  },
+  {
+    name: 'Ceramic Coating',
+    image: ceramic,
+    size: 'wide',
+    imgPos: 'center 35%',
+    description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
   },
 ];
 
@@ -62,13 +67,13 @@ export default function ServicesSection() {
       <Reveal as="h2" className={styles.kicker}>Our Services</Reveal>
 
       <div className={styles.grid}>
-        {SERVICES.map(({ name, image, size, description }, i) => (
+        {SERVICES.map(({ name, image, size, description, imgPos }, i) => (
           <Reveal
             key={name}
             className={`${styles.card} ${styles[size]}`}
             delay={Math.min(i * 70, 280)}
           >
-            <img src={image} alt={name} className={styles.cardImage} loading="lazy" />
+            <img src={image} alt={name} className={styles.cardImage} loading="lazy" style={imgPos ? { objectPosition: imgPos } : undefined} />
             <div className={styles.cardOverlay} aria-hidden="true" />
             <div className={styles.cardContent}>
               <p className={styles.cardDesc}>{description}</p>

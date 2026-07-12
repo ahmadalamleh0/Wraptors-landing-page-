@@ -9,6 +9,7 @@ import {
   OPENING_TAGLINE,
 } from '../config';
 import footerBg from '../assets/footer-cars.jpg';
+import footerBgDesktop from '../assets/footer-cars-desktop.jpg';
 import { WhatsAppIcon, InstagramIcon, YouTubeIcon, WaitlistIcon } from './icons';
 import styles from './Footer.module.css';
 
@@ -42,8 +43,8 @@ export default function Footer({ isLaunched = false }) {
 
   return (
     <Reveal as="footer" className={styles.footer}>
-      {/* swap footer-cars.jpg for a Dubai/marina/desert asset when available */}
-      <img ref={imgRef} src={footerBg} alt="" className={styles.footerImage} aria-hidden="true" />
+      <img ref={imgRef} src={footerBgDesktop} alt="" className={`${styles.footerImage} ${styles.footerImageDesktop}`} aria-hidden="true" />
+      <img src={footerBg} alt="" className={`${styles.footerImage} ${styles.footerImageMobile}`} aria-hidden="true" />
       <div className={styles.footerOverlay} aria-hidden="true" />
 
       <div className={styles.footerTop}>
